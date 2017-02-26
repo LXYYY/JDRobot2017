@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jdrobot/Desktop/JDRobot/CV/CVCalib.cpp
+CVClass.h
+/home/jdrobot/Desktop/JDRobot/CV/CVClass.h
+opencv2/opencv.hpp
+-
+iostream
+-
+math.h
+-
+
+/home/jdrobot/Desktop/JDRobot/CV/CVClass.cpp
+CVClass.h
+/home/jdrobot/Desktop/JDRobot/CV/CVClass.h
+
+/home/jdrobot/Desktop/JDRobot/CV/CVClass.h
+opencv2/opencv.hpp
+-
+iostream
+-
+
+/home/jdrobot/Desktop/JDRobot/Communicate/Communication.cpp
+Communication.h
+/home/jdrobot/Desktop/JDRobot/Communicate/Communication.h
+
+/home/jdrobot/Desktop/JDRobot/Communicate/Communication.h
+
+/home/jdrobot/Desktop/JDRobot/main.cpp
+iostream
+-
+opencv2/opencv.hpp
+-
+CV/CVClass.h
+/home/jdrobot/Desktop/JDRobot/CV/CVClass.h
+
