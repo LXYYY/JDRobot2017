@@ -14,17 +14,22 @@ CVClass cvClass;
 int main()
 {
 	cvClass.camInit(false);
-	if (cvClass.camParamInit())
-	{
-		cout << "camParamInit failed" << endl;
-		getchar();
-		return 0;
-	}
+
+//    if (cvClass.camParamInit())
+//	{
+//		cout << "camParamInit failed" << endl;
+//		getchar();
+//		return 0;
+//	}
 	bool worldCSInited = false;
-	while (1)
+
+    while (1)
 	{
 		cvClass.getImage();
-		if (!worldCSInited)
+        cvClass.showImage();
+        waitKey(1);
+        continue;
+        if (!worldCSInited)
 		{
 			worldCSInited = cvClass.worldCSInit();
 			continue;

@@ -19,11 +19,31 @@ math.h
 /home/jdrobot/Desktop/JDRobot/CV/CVClass.cpp
 CVClass.h
 /home/jdrobot/Desktop/JDRobot/CV/CVClass.h
+../Param.h
+/home/jdrobot/Desktop/JDRobot/Param.h
 
 /home/jdrobot/Desktop/JDRobot/CV/CVClass.h
 opencv2/opencv.hpp
 -
 iostream
+-
+errno.h
+-
+fcntl.h
+-
+linux/videodev2.h
+-
+stdint.h
+-
+stdio.h
+-
+string.h
+-
+sys/ioctl.h
+-
+sys/mman.h
+-
+unistd.h
 -
 
 /home/jdrobot/Desktop/JDRobot/Communicate/Communication.cpp
@@ -31,6 +51,8 @@ Communication.h
 /home/jdrobot/Desktop/JDRobot/Communicate/Communication.h
 
 /home/jdrobot/Desktop/JDRobot/Communicate/Communication.h
+
+/home/jdrobot/Desktop/JDRobot/Param.h
 
 /home/jdrobot/Desktop/JDRobot/main.cpp
 iostream

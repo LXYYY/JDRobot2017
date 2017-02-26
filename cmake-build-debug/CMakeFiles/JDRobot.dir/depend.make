@@ -6,6 +6,7 @@ CMakeFiles/JDRobot.dir/CV/CVCalib.cpp.o: ../CV/CVClass.h
 
 CMakeFiles/JDRobot.dir/CV/CVClass.cpp.o: ../CV/CVClass.cpp
 CMakeFiles/JDRobot.dir/CV/CVClass.cpp.o: ../CV/CVClass.h
+CMakeFiles/JDRobot.dir/CV/CVClass.cpp.o: ../Param.h
 
 CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o: ../Communicate/Communication.cpp
 CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o: ../Communicate/Communication.h
