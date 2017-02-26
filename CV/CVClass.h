@@ -14,15 +14,15 @@ using namespace std;
 using namespace cv;
 class CVClass
 {
-private:
+public:
     class CamClass
     {
     public:
         CamClass(){}
         ~CamClass(){}
         VideoCapture cam;
-        Size imgSize=Size(1280,720);
-        uchar *buffer;
+        Size imgSize=Size(640,480);
+//        uchar *buffer;
         int fd;
         int fd_temp;
         char camFile[20]="/dev/video0";
@@ -31,7 +31,7 @@ private:
         struct v4l2_fmtdesc fmtdesc;
         struct v4l2_format fmt,fmtack;
         struct v4l2_requestbuffers req;
-        struct v4l2_buffer buf;
+//        struct v4l2_buffer buf;
         enum   v4l2_buf_type type;
         bool openCam(int id);
         bool init_v4l2(int id);//deful 1280*720
@@ -42,7 +42,8 @@ private:
         int get_Video_Parameter(__u32 parameter);
         Mat getImage(void);
     };
-    CamClass camL,camR;
+    CamClass camL;
+//    CamClass camR;
     enum Pattern { CHESSBOARD, CIRCLES_GRID, ASYMMETRIC_CIRCLES_GRID };
 	void calcChessboardCorners(Size boardSize, float squareSize, vector<Point3f>& corners, Pattern patternType);
 

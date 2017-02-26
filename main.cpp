@@ -13,8 +13,17 @@ CVClass cvClass;
 
 int main()
 {
-	cvClass.camInit(false);
-
+	cvClass.camInit(true);
+//    while(1)
+//    {
+//        double time=static_cast<double>(getTickCount());
+//
+//        cvClass.camL.getImage();
+//        //imshow("test",cvClass.frameL);
+////        waitKey(1);
+//        time=static_cast<double>(getTickCount()-time)/getTickFrequency();
+//        cout<<"time="<<time<<endl;
+//    }
 //    if (cvClass.camParamInit())
 //	{
 //		cout << "camParamInit failed" << endl;
@@ -25,8 +34,9 @@ int main()
 
     while (1)
 	{
-		cvClass.getImage();
-        cvClass.showImage();
+//		cvClass.getImage();
+        cvClass.camL.getImage();
+        //cvClass.showImage();
         waitKey(1);
         continue;
         if (!worldCSInited)

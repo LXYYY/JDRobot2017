@@ -2,7 +2,8 @@
 #include "../Param.h"
 
 int rate = 1000;
-
+uchar *buffer;
+struct v4l2_buffer buf;
 CVClass::CVClass() {
 }
 
@@ -14,21 +15,21 @@ bool CVClass::camInit(bool LR) {
 
     try {
         if (LR) {
-            camR.openCam(1);
+//            camR.openCam(1);
             camL.openCam(0);
         } else {
             camL.openCam(1);
-            camR.openCam(0);
+//            camR.openCam(0);
         }
     }
     catch (...) {
         cout << "camera open failed" << endl;
-        return true;
+        return false;
     }
     int exposure = -6;
     int brightness = 0;
-#ifdef WIN
 
+#ifdef WIN
     try
     {
         camL.set(CV_CAP_PROP_EXPOSURE, exposure);
@@ -52,12 +53,13 @@ bool CVClass::camInit(bool LR) {
 #ifdef LINUX
 
     try {
-        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL);
-        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, exposure);
-        camL.set_Video_Parameter(V4L2_CID_BRIGHTNESS, brightness);
-        camR.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL);
-        camR.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, exposure);
-        camR.set_Video_Parameter(V4L2_CID_BRIGHTNESS, brightness);
+        camL.set_Video_Fps(100,600);
+        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_AUTO);
+//        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, exposure);
+//        camL.set_Video_Parameter(V4L2_CID_BRIGHTNESS, brightness);
+//        camR.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL);
+//        camR.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, exposure);
+//        camR.set_Video_Parameter(V4L2_CID_BRIGHTNESS, brightness);
     }
     catch (...) {
         cout << "camera set failed" << endl;
@@ -77,7 +79,8 @@ bool CVClass::getImage() {
 
 #ifdef LINUX
         frameL = camL.getImage();
-        frameR = camR.getImage();
+//        frameR = camR.getImage();
+        cout<<frameL.rows<<"*"<<frameL.cols<<endl;
 #endif
     }
     catch (...) {
@@ -480,12 +483,16 @@ bool CVClass::CamClass::openCam(int id) {
     return true;
 }
 
-Mat CVClass::CamClass::getImage(void) {
+Mat CVClass::CamClass::getImage(void)
+{
     Mat timg;
     ioctl(fd, VIDIOC_DQBUF, &buf);
     buf.index = 0;
     timg = imdecode(cv::Mat(imgSize, CV_8UC3, (void *) buffer), CV_LOAD_IMAGE_COLOR);
+//    cout<<timg.empty()<<endl;
     ioctl(fd, VIDIOC_QBUF, &buf);
+//    imshow("test",timg);
+//    waitKey(1);
     return timg;
 }
 
