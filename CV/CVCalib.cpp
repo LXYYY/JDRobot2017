@@ -162,7 +162,7 @@ Mat_<double> IterativeLinearLSTriangulation(Point3d u,    //homogenous image poi
 }
 
 
-bool CVClass::getPoint3d(vector<Point> pts2dL, vector<Point> pts2dR, vector<Point> &pts3d) {
+bool CVClass::getPoint3d(vector<Point> pts2dL, vector<Point> pts2dR, vector<Point3f> &pts3d) {
     double fxL = camParam.cameraMatrix[0].at<double>(0, 0);
     double fyL = camParam.cameraMatrix[0].at<double>(1, 1);
     double cxL = camParam.cameraMatrix[0].at<double>(0, 2);
@@ -172,61 +172,34 @@ bool CVClass::getPoint3d(vector<Point> pts2dL, vector<Point> pts2dR, vector<Poin
     double fyR = camParam.cameraMatrix[1].at<double>(1, 1);
     double cxR = camParam.cameraMatrix[1].at<double>(0, 2);
     double cyR = camParam.cameraMatrix[1].at<double>(1, 2);
+    pts3d.clear();
     if (pts2dL.size() != pts2dR.size()) {
         cout << "pt2dL.size() != pt2dR.size()" << endl;
+        return false;
     }
-    //for (int i = 0;i < pts2dL.size();i++)
-    //{
-    //	undistortPoints()
-    //}
-    pts3d.clear();
-    cv::Mat pts3dMat(1, pts2dL.size(), CV_64FC4);
-    cout << pts2dL << endl << pts2dR << endl;
-    //cout << (Mat_<double>)pts3dMat/pts3dMat.at<long>(0, 3)  << endl;
-    //Vec4i val= pts3dMat.at<long>(0, 0);
-    //	cout << pts3dMat.at<long>(0, 3) << endl;
+    try {
+        pts3d.clear();
+        cv::Mat pts3dMat(1, pts2dL.size(), CV_64FC4);
 
-    //Mat ptsLM(1, 1, CV_64FC2);
-    //Mat ptsRM(1, 1, CV_64FC2);
-    //Mat undistPtsLM(1, 1, CV_64FC2);
-    //Mat undistPtsRM(1, 1, CV_64FC2);
-    //ptsLM.at<Vec2d>(0, 0)[0] = pts2dL.at(0).x;
-    //ptsLM.at<Vec2d>(0, 0)[1] = pts2dL.at(0).y;
-    //ptsRM.at<Vec2d>(0, 0)[0] = pts2dR.at(0).x;
-    //ptsRM.at<Vec2d>(0, 0)[1] = pts2dR.at(0).y;
-    //cout << ptsLM << endl << ptsRM << endl;
-
-    //undistortPoints(ptsLM, undistPtsLM, camParam.cameraMatrix[0], camParam.distCoeffs[0]);
-    //undistortPoints(ptsRM, undistPtsRM, camParam.cameraMatrix[1], camParam.distCoeffs[1]);
-
-    //Point3d ptL = Point3d(undistPtsLM.at<Vec2d>(0, 0)[0]*fxL+cxL, undistPtsLM.at<Vec2d>(0, 0)[1]*fyL+cyL, 1);
-    //Point3d ptR = Point3d(undistPtsRM.at<Vec2d>(0, 0)[0]*fxR+cxR, undistPtsRM.at<Vec2d>(0, 0)[1]*fyR+cyR, 1);
-    //cout <<"undistorted"<< ptL << endl << ptR << endl;
-    int npts = pts2dL.size();
-    vector<Mat> pt3d(npts);
-    for (int i = 0; i < npts; i++) {
-        Point3d ptL = Point3d(pts2dL.at(i).x, pts2dL.at(i).y, 1);
-        Point3d ptR = Point3d(pts2dR.at(i).x, pts2dR.at(i).y, 1);
-        pt3d.at(i) = IterativeLinearLSTriangulation(ptL, camParam.P1, ptR, camParam.P2);
+        int npts = pts2dL.size();
+        vector<Mat> pt3dMat(npts);
+        for (size_t i = 0; i < npts; i++) {
+            Point3d ptL = Point3d(pts2dL.at(i).x, pts2dL.at(i).y, 1);
+            Point3d ptR = Point3d(pts2dR.at(i).x, pts2dR.at(i).y, 1);
+            pt3dMat.at(i) = IterativeLinearLSTriangulation(ptL, camParam.P1,
+                                                           ptR, camParam.P2);
+        }
+        for (int i = 0; i < pt3dMat.size(); i++) {
+            pts3d.push_back(Point3f(pt3dMat.at(i).at<float>(0),
+                                    pt3dMat.at(i).at<float>(1),
+                                    pt3dMat.at(i).at<float>(2)));
+        }
     }
-    if (npts >= 1) {
-        cout << pt3d.at(0) << endl;
-        cout << pt3d.at(1) << endl;
-        cout << "dist=" << norm(pt3d.at(0) - pt3d.at(1)) << endl;;
+    catch (...) {
+        cout << "compute 3d points failed" << endl;
+        return false;
     }
-
-//    vector<Point3f> Pts3dW(tPts3dW.size());
-//
-//    perspectiveTransform(tPts3dW, Pts3dW, camParam.m);
-//    cout << (Mat) Pts3dW << endl;
-    //Mat showDist(Size(1000, 500), CV_8UC3);
-    //char dist[20] = "test";
-    //sprintf(dist, "%8.4f", norm(pt3d));
-    //putText(showDist, dist, Point(0, 250), FONT_HERSHEY_PLAIN, 10, Scalar(0, 0, 255));
-    //imshow("dist", showDist);
-    //waitKey(1);
-
-    return false;
+    return true;
 }
 
 void CVClass::calcChessboardCorners(Size boardSize, float squareSize, vector<Point3f> &corners,
@@ -255,59 +228,48 @@ void CVClass::calcChessboardCorners(Size boardSize, float squareSize, vector<Poi
 }
 
 bool CVClass::worldCSInit(void) {
-    float squareSize = 35.5;
-    Pattern patternType = CHESSBOARD;
-    vector<Point2f> pointbuf;
-    Size boardSize = Size(5, 4);
-    bool found;
-    Mat frameGrey;
-    cvtColor(frameL, frameGrey, COLOR_BGR2GRAY);
-    switch (patternType) {
-        case CHESSBOARD:
-            found = findChessboardCorners(frameL, boardSize, pointbuf,
-                                          CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_FAST_CHECK | CALIB_CB_NORMALIZE_IMAGE);
-            break;
-        case CIRCLES_GRID:
-            found = findCirclesGrid(frameL, boardSize, pointbuf);
-            break;
-        case ASYMMETRIC_CIRCLES_GRID:
-            found = findCirclesGrid(frameL, boardSize, pointbuf, CALIB_CB_ASYMMETRIC_GRID);
-            break;
-        default:
-            return fprintf(stderr, "Unknown pattern type\n"), -1;
-    }
-    if (patternType == CHESSBOARD && found)
-        cornerSubPix(frameGrey, pointbuf, Size(11, 11),
-                     Size(-1, -1), TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.1));
+    bool foundTagsL = aprilTags.processImage(frameL, aprilTags.tagsL);
+    bool foundTagsR = aprilTags.processImage(frameR, aprilTags.tagsR);
 
-    if (found)
-        drawChessboardCorners(frameL, boardSize, Mat(pointbuf), found);
-    imshow("worldCS", frameL);
-    char c = waitKey(1);
-    if (c == 'w') {
-        if (found) {
-            vector<vector<Point3f> > objectPoints(1);
-            calcChessboardCorners(boardSize, squareSize, objectPoints.at(0), patternType);
-            vector<vector<Point2f> > imagePoints;
-            imagePoints.push_back(pointbuf);
+    namedWindow("tags left");
+    namedWindow("tags right");
+
+    Mat tImgL, tImgR;
+    frameL.copyTo(tImgL);
+    frameR.copyTo(tImgR);
+
+    aprilTags.drawTags(tImgL, aprilTags.tagsL);
+    aprilTags.drawTags(tImgR, aprilTags.tagsR);
+
+    imshow("tags left", tImgL);
+    imshow("tags left", tImgL);
+
+    char c = waitKeyProc(1);
+
+    if (c == 'w')
+        if (foundTagsL && foundTagsR) {
+            vector<Point3f> pts3d;
+            vector<Point> pts2dL, pts2dR;
+
+            for (int i = 0; i < 4; i++) {
+                pts2dL.push_back(
+                        Point(aprilTags.tagsL.at(0).p[i].first,
+                              aprilTags.tagsL.at(0).p[i].second));
+                pts2dR.push_back(
+                        Point(aprilTags.tagsR.at(0).p[i].first,
+                              aprilTags.tagsR.at(0).p[i].second));
+            }
+            pts2dL.push_back(
+                    Point(aprilTags.tagsL.at(0).cxy.first,
+                          aprilTags.tagsL.at(0).cxy.second));
+            pts2dR.push_back(
+                    Point(aprilTags.tagsR.at(0).cxy.first,
+                          aprilTags.tagsR.at(0).cxy.second));
+
+            getPoint3d(pts2dL, pts2dR, pts3d);
 
 
-            calibrateCamera(objectPoints, imagePoints, frameL.size(), camParam.cameraMatrix[0], camParam.distCoeffs[0],
-                            camParam.rvec, camParam.tvec, CALIB_USE_INTRINSIC_GUESS);
-            Matx33d r;
-            Rodrigues(camParam.rvec, r);
-            camParam.m << r(0, 0), r(0, 1), r(0, 2), camParam.tvec.at<double>(0),
-                    r(1, 0), r(1, 1), r(1, 2), camParam.tvec.at<double>(1),
-                    r(2, 0), r(2, 1), r(2, 2), camParam.tvec.at<double>(2),
-                    0, 0, 0, 1;
-            cout << "m:" << camParam.m << endl;
-            getchar();
-            return true;
-        } else {
-            cout << "no circles grid found" << endl;
-            return false;
         }
-    }
     return false;
 }
 
@@ -531,7 +493,7 @@ bool CVClass::camCalib(void) {
     for (int lr = 1; lr > -1; lr--) {
         imgs.clear();
         imagePoints.clear();
-        mode=CAPTURING;
+        mode = CAPTURING;
         nframes = 0;
         for (int i = 0;; i++) {
             if (lr == 0)

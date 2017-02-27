@@ -13,11 +13,16 @@ set(SOURCE_FILES
         CV/CVCalib.cpp
         CV/CVClass.cpp
         Communicate/Communication.cpp
-        ${HEADER_FILES} AprilTags/AprilTags.cpp AprilTags/AprilTags.h)
+        ${HEADER_FILES} AprilTagsClass/AprilTagsClass.cpp AprilTagsClass/AprilTagsClass.h)
 
 add_executable(JDRobot ${SOURCE_FILES})
 
+include_directories(/home/jdrobot/apriltags/build/include
+        /usr/include/eigen3)
+
+
 link_directories("/usr/local/lib")
+target_link_libraries(JDRobot libapriltags.a)
 target_link_libraries(JDRobot opencv_calib3d)
 target_link_libraries(JDRobot opencv_core)
 target_link_libraries(JDRobot opencv_features2d)

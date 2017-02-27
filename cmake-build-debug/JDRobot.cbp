@@ -44,6 +44,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/jdrobot/apriltags/build/include"/>
+					<Add directory="/usr/include/eigen3"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
@@ -67,6 +69,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/jdrobot/apriltags/build/include"/>
+					<Add directory="/usr/include/eigen3"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
@@ -84,10 +88,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/jdrobot/Desktop/JDRobot/AprilTags/AprilTags.cpp">
+		<Unit filename="/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTagsClass.cpp">
 			<Option target="JDRobot"/>
 		</Unit>
-		<Unit filename="/home/jdrobot/Desktop/JDRobot/AprilTags/AprilTags.h">
+		<Unit filename="/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTagsClass.h">
 			<Option target="JDRobot"/>
 		</Unit>
 		<Unit filename="/home/jdrobot/Desktop/JDRobot/CV/CVCalib.cpp">

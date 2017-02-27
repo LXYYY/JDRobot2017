@@ -12,7 +12,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-#include "../AprilTags/AprilTags.h"
+#include "../AprilTagsClass/AprilTagsClass.h"
 
 using namespace std;
 using namespace cv;
@@ -119,7 +119,7 @@ public:
         BLUE,
         GREEN
     };
-    class AprilTags;
+    AprilTagsClass aprilTags;
     class objBoxImg {
     public:
         ColorE color;
@@ -166,11 +166,13 @@ public:
     Mat frameL, frameR;
     Mat rFrameL, rFrameR;
 
+    bool worldCSInited = false;
+
     bool camParamInit(void);
 
     bool undistortFrame(void);
 
-    bool getPoint3d(vector<Point> pt2dL, vector<Point> pt2dR, vector<Point> &pt3d);
+    bool getPoint3d(vector<Point> pt2dL, vector<Point> pt2dR, vector<Point3f> &pt3d);
 
     bool camCalib(void);
 

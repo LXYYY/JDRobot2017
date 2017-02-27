@@ -25,10 +25,13 @@ int main() {
         getchar();
         return 0;
     }
-    bool worldCSInited = false;
+
     while (1) {
         cvClass.getImage();
-
+        if (!cvClass.worldCSInited) {
+            cvClass.worldCSInited = cvClass.worldCSInit();
+            continue;
+        }
         cvClass.undistortFrame();
         cvClass.showImage();
         cvClass.showUndistortedImage();
@@ -37,7 +40,7 @@ int main() {
         bool foundL = cvClass.processSingle(cvClass.frameL, false, objBoxL);
         bool foundR = cvClass.processSingle(cvClass.frameR, true, objBoxR);
         if (foundL && foundR) {
-            vector<Point> pts3d;
+            vector<Point3f> pts3d;
             vector<Point> pts2dL, pts2dR;
 
             objBoxL.at(0).sortPts();
