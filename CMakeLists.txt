@@ -13,7 +13,7 @@ set(SOURCE_FILES
         CV/CVCalib.cpp
         CV/CVClass.cpp
         Communicate/Communication.cpp
-        ${HEADER_FILES})
+        ${HEADER_FILES} AprilTags/AprilTags.cpp AprilTags/AprilTags.h)
 
 add_executable(JDRobot ${SOURCE_FILES})
 

@@ -123,6 +123,33 @@ JDRobot/fast:
 	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/build
 .PHONY : JDRobot/fast
 
+AprilTags/AprilTags.o: AprilTags/AprilTags.cpp.o
+
+.PHONY : AprilTags/AprilTags.o
+
+# target to build an object file
+AprilTags/AprilTags.cpp.o:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/AprilTags/AprilTags.cpp.o
+.PHONY : AprilTags/AprilTags.cpp.o
+
+AprilTags/AprilTags.i: AprilTags/AprilTags.cpp.i
+
+.PHONY : AprilTags/AprilTags.i
+
+# target to preprocess a source file
+AprilTags/AprilTags.cpp.i:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/AprilTags/AprilTags.cpp.i
+.PHONY : AprilTags/AprilTags.cpp.i
+
+AprilTags/AprilTags.s: AprilTags/AprilTags.cpp.s
+
+.PHONY : AprilTags/AprilTags.s
+
+# target to generate assembly for a file
+AprilTags/AprilTags.cpp.s:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/AprilTags/AprilTags.cpp.s
+.PHONY : AprilTags/AprilTags.cpp.s
+
 CV/CVCalib.o: CV/CVCalib.cpp.o
 
 .PHONY : CV/CVCalib.o
@@ -240,6 +267,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... JDRobot"
+	@echo "... AprilTags/AprilTags.o"
+	@echo "... AprilTags/AprilTags.i"
+	@echo "... AprilTags/AprilTags.s"
 	@echo "... CV/CVCalib.o"
 	@echo "... CV/CVCalib.i"
 	@echo "... CV/CVCalib.s"

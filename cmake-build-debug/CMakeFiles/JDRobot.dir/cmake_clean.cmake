@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/JDRobot.dir/CV/CVCalib.cpp.o"
   "CMakeFiles/JDRobot.dir/CV/CVClass.cpp.o"
   "CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o"
+  "CMakeFiles/JDRobot.dir/AprilTags/AprilTags.cpp.o"
   "JDRobot.pdb"
   "JDRobot"
 )

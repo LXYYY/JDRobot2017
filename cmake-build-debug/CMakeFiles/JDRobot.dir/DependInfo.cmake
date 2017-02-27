@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/jdrobot/Desktop/JDRobot/AprilTags/AprilTags.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/AprilTags/AprilTags.cpp.o"
   "/home/jdrobot/Desktop/JDRobot/CV/CVCalib.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/CV/CVCalib.cpp.o"
   "/home/jdrobot/Desktop/JDRobot/CV/CVClass.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/CV/CVClass.cpp.o"
   "/home/jdrobot/Desktop/JDRobot/Communicate/Communication.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o"

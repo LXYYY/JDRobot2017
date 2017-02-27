@@ -2,8 +2,9 @@
 #include "../Param.h"
 
 int rate = 1000;
-uchar *buffer;
-struct v4l2_buffer buf;
+
+//uchar *buffer;
+//struct v4l2_buffer buf;
 CVClass::CVClass() {
 }
 
@@ -15,20 +16,17 @@ bool CVClass::camInit(bool LR) {
 
     try {
         if (LR) {
-//            camR.openCam(1);
+            camR.openCam(1);
             camL.openCam(0);
         } else {
             camL.openCam(1);
-//            camR.openCam(0);
+            camR.openCam(0);
         }
     }
     catch (...) {
         cout << "camera open failed" << endl;
         return false;
     }
-    int exposure = -6;
-    int brightness = 0;
-
 #ifdef WIN
     try
     {
@@ -40,7 +38,6 @@ bool CVClass::camInit(bool LR) {
         camL.set(CV_CAP_PROP_FRAME_HEIGHT, 720);
         camR.set(CV_CAP_PROP_FRAME_WIDTH, 1280);
         camR.set(CV_CAP_PROP_FRAME_HEIGHT, 720);
-
     }
     catch (...)
     {
@@ -53,8 +50,20 @@ bool CVClass::camInit(bool LR) {
 #ifdef LINUX
 
     try {
-        camL.set_Video_Fps(100,600);
-        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_AUTO);
+        camL.set_Video_Fps(100, 600);
+//    get_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE);
+        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL);
+        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, camL.exposure);
+//        camL.set_Video_Parameter(V4L2_CID_BRIGHTNESS, brightness);
+
+        camR.set_Video_Fps(100, 600);
+//    get_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE);
+        camR.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL);
+        camR.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, camR.exposure);
+
+//        camL.set_Video_Parameter(V4L2_CID_BRIGHTNESS, brightness);
+
+//        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL);
 //        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, exposure);
 //        camL.set_Video_Parameter(V4L2_CID_BRIGHTNESS, brightness);
 //        camR.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL);
@@ -79,8 +88,8 @@ bool CVClass::getImage() {
 
 #ifdef LINUX
         frameL = camL.getImage();
-//        frameR = camR.getImage();
-        cout<<frameL.rows<<"*"<<frameL.cols<<endl;
+        frameR = camR.getImage();
+//        cout<<frameL.rows<<"*"<<frameL.cols<<endl;
 #endif
     }
     catch (...) {
@@ -90,8 +99,6 @@ bool CVClass::getImage() {
 }
 
 bool CVClass::showImage() {
-    namedWindow("image left");
-    namedWindow("image right");
 
     try {
         imshow("image left", frameL);
@@ -196,12 +203,12 @@ bool CVClass::processSingle(Mat img, bool LorR, vector<objBoxImg> &objBoxRlt) {
     Mat dst, cdst;
 
     resize(img, src, Size(), 1, 1);
-    //imshow("raw"+LR, src);
+//    imshow("raw"+LR, src);
     findGreen(src);
-    //imshow("green"+LR, src);
+//    imshow("green"+LR, src);
 
     morphologyEx(src, src, MORPH_CLOSE, element);
-    //imshow("open"+LR, src);
+//    imshow("open"+LR, src);
 
     Canny(src, dst, 100, 200, 3);
     cvtColor(dst, cdst, COLOR_GRAY2BGR);
@@ -224,7 +231,7 @@ bool CVClass::processSingle(Mat img, bool LorR, vector<objBoxImg> &objBoxRlt) {
         }
     }
     cvtColor(src, src, COLOR_GRAY2BGR);
-    //drawContours(cdst, contours0, -1, Scalar(0, 0, 255));
+//    drawContours(cdst, contours0, -1, Scalar(0, 0, 255));
     drawContours(cdst, approx, -1, Scalar(0, 255, 0));
     imshow("test" + LR, cdst);
 
@@ -269,6 +276,30 @@ vector<CVClass::objBox3D> CVClass::processStereo() {
         return objBox;
     }
 }
+
+char CVClass::waitKeyProc(int delay) {
+    char c = waitKey(delay);
+    if (c == 'i') {
+        camL.exposure++;
+        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, camL.exposure);
+        cout << "L exposure=" << camL.exposure << " R exposure=" << camR.exposure << endl;
+
+    } else if (c == 'k') {
+        camL.exposure--;
+        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, camL.exposure);
+        cout << "L exposure=" << camL.exposure << " R exposure=" << camR.exposure << endl;
+    } else if (c == 'o') {
+        camR.exposure++;
+        camR.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, camR.exposure);
+        cout << "L exposure=" << camL.exposure << " R exposure=" << camR.exposure << endl;
+    } else if (c == 'l') {
+        camR.exposure--;
+        cout << "L exposure=" << camL.exposure << " R exposure=" << camR.exposure << endl;
+        camR.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, camR.exposure);
+    }
+    return c;
+}
+
 
 bool CVClass::CamClass::v4l2_grab(void) {
     //struct v4l2_requestbuffers req = {0};
@@ -324,8 +355,7 @@ bool CVClass::CamClass::v4l2_grab(void) {
     return true;
 }
 
-bool CVClass::CamClass::init_v4l2(int id)
-{
+bool CVClass::CamClass::init_v4l2(int id) {
 
 //    if ((fd = open(FILE_VIDEO1, O_RDWR|O_NONBLOCK)) == -1)//not block
     sprintf(camFile, "/dev/video%d", id);
@@ -372,8 +402,8 @@ bool CVClass::CamClass::init_v4l2(int id)
     }
     //set fmt
     fmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-    fmt.fmt.pix.width = (__u32)imgSize.width;
-    fmt.fmt.pix.height = (__u32)imgSize.height;
+    fmt.fmt.pix.width = (__u32) imgSize.width;
+    fmt.fmt.pix.height = (__u32) imgSize.height;
     fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_MJPEG; //*************************V4L2_PIX_FMT_YUYV****************
     fmt.fmt.pix.field = V4L2_FIELD_NONE;
 //    fmt.fmt.pix.priv = 1;
@@ -483,8 +513,7 @@ bool CVClass::CamClass::openCam(int id) {
     return true;
 }
 
-Mat CVClass::CamClass::getImage(void)
-{
+Mat CVClass::CamClass::getImage(void) {
     Mat timg;
     ioctl(fd, VIDIOC_DQBUF, &buf);
     buf.index = 0;
