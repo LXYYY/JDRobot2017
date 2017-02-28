@@ -50,7 +50,7 @@ public:
 
     void setTagCodes(string s);
 
-    void setup();
+    bool setup();
 
     bool processImage(Mat image,vector<AprilTags::TagDetection>& detections);
 

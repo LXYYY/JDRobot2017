@@ -14,11 +14,11 @@ bool CVClass::camParamInit(void) {
     if (!paramL.isOpened()) {
         cout << "paramL.xml not available" << endl;
         getchar();
-        return 0;
+        return false;
     }
     if (!paramR.isOpened()) {
         cout << "paramR.xml not available" << endl;
-        return 0;
+        return false;
     }
 
     cout << (int) paramL["nframes"] << endl;
@@ -35,7 +35,7 @@ bool CVClass::camParamInit(void) {
     getImage();
     if (frameL.size() != frameR.size()) {
         cout << "imgSizes not equal" << endl;
-        return true;
+        return false;
     } else
         camParam.imgSize = frameL.size();
 
@@ -51,14 +51,14 @@ bool CVClass::camParamInit(void) {
     }
     catch (...) {
         cout << "initUndistortedRectifyMap failed " << endl;
-        return true;
+        return false;
     }
 
     //extrinsics
     FileStorage extrinsics("/home/jdrobot/Desktop/JDRobot/extrinsics.yml", FileStorage::READ);
     if (!extrinsics.isOpened()) {
         cout << "extrinsics.xml not available" << endl;
-        return true;
+        return false;
     }
 
     extrinsics["R"] >> camParam.R;
@@ -71,7 +71,7 @@ bool CVClass::camParamInit(void) {
 
     extrinsics.release();
 
-    return false;
+    return true;
 }
 
 bool CVClass::undistortFrame(void) {
@@ -179,9 +179,8 @@ bool CVClass::getPoint3d(vector<Point> pts2dL, vector<Point> pts2dR, vector<Poin
     }
     try {
         pts3d.clear();
-        cv::Mat pts3dMat(1, pts2dL.size(), CV_64FC4);
 
-        int npts = pts2dL.size();
+        size_t npts = pts2dL.size();
         vector<Mat> pt3dMat(npts);
         for (size_t i = 0; i < npts; i++) {
             Point3d ptL = Point3d(pts2dL.at(i).x, pts2dL.at(i).y, 1);
@@ -189,10 +188,11 @@ bool CVClass::getPoint3d(vector<Point> pts2dL, vector<Point> pts2dR, vector<Poin
             pt3dMat.at(i) = IterativeLinearLSTriangulation(ptL, camParam.P1,
                                                            ptR, camParam.P2);
         }
-        for (int i = 0; i < pt3dMat.size(); i++) {
-            pts3d.push_back(Point3f(pt3dMat.at(i).at<float>(0),
-                                    pt3dMat.at(i).at<float>(1),
-                                    pt3dMat.at(i).at<float>(2)));
+        for (size_t i = 0; i < pt3dMat.size(); i++) {
+            pts3d.push_back(Point3f(pt3dMat.at(i).at<double>(0),
+                                    pt3dMat.at(i).at<double>(1),
+                                    pt3dMat.at(i).at<double>(2)));
+//            cout<<pt3dMat.at(i)<<endl;
         }
     }
     catch (...) {
@@ -228,8 +228,10 @@ void CVClass::calcChessboardCorners(Size boardSize, float squareSize, vector<Poi
 }
 
 bool CVClass::worldCSInit(void) {
-    bool foundTagsL = aprilTags.processImage(frameL, aprilTags.tagsL);
-    bool foundTagsR = aprilTags.processImage(frameR, aprilTags.tagsR);
+    bool foundTagsL;
+    bool foundTagsR;
+    foundTagsL = aprilTags.processImage(frameL, aprilTags.tagsL);
+    foundTagsR = aprilTags.processImage(frameR, aprilTags.tagsR);
 
     namedWindow("tags left");
     namedWindow("tags right");
@@ -241,12 +243,16 @@ bool CVClass::worldCSInit(void) {
     aprilTags.drawTags(tImgL, aprilTags.tagsL);
     aprilTags.drawTags(tImgR, aprilTags.tagsR);
 
+    resize(tImgL,tImgL,Size(),0.5,0.5);
+    resize(tImgR,tImgR,Size(),0.5,0.5);
     imshow("tags left", tImgL);
-    imshow("tags left", tImgL);
+    imshow("tags right", tImgR);
 
     char c = waitKeyProc(1);
 
-    if (c == 'w')
+    if (c == 'w') {
+        cout<<c<<endl;
+        cout<<foundTagsL<<" "<<foundTagsR<<endl;
         if (foundTagsL && foundTagsR) {
             vector<Point3f> pts3d;
             vector<Point> pts2dL, pts2dR;
@@ -267,9 +273,9 @@ bool CVClass::worldCSInit(void) {
                           aprilTags.tagsR.at(0).cxy.second));
 
             getPoint3d(pts2dL, pts2dR, pts3d);
-
-
+            cout<<(Mat)pts3d<<endl;
         }
+    }
     return false;
 }
 

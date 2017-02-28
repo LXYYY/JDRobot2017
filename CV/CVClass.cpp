@@ -101,6 +101,8 @@ bool CVClass::getImage() {
 bool CVClass::showImage() {
 
     try {
+        resize(frameL,frameL,Size(),0.5,0.5);
+        resize(frameR,frameR,Size(),0.5,0.5);
         imshow("image left", frameL);
         imshow("image right", frameR);
     }
