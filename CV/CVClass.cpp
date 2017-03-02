@@ -307,7 +307,17 @@ bool CVClass::getPointWorld(vector<Mat> &pt3d, vector<Mat> &ptW) {
     try {
         for (size_t i = 0; i < pt3d.size(); i++) {
             ptW.push_back(camParam.R2W.inv() * (pt3d.at(i) - camParam.T2W));
-            cout<<"getPointworld"<<camParam.R2W<<camParam.R2W.inv()<<pt3d.at(i)<<camParam.T2W<<endl;
+            cout << "getPointworld" << endl
+                 << "camParam.R2W:" << camParam.R2W << endl
+                 << "camParam.R2W.inv:" << camParam.R2W.inv() << endl
+                 << "R2W.norm:" << norm(camParam.R2W) << endl
+                 << "R2W.inv.norm:" << norm(camParam.R2W.inv()) << endl
+                 << "r2w*r2w.inv:" << camParam.R2W * camParam.R2W.inv() << endl
+                 << "pt3d.at(i):" << pt3d.at(i) << endl
+                 << "ori dist;" << norm((pt3d.at(i) - camParam.T2W)) << endl
+                 << "dist:" << norm(camParam.R2W.inv() * (pt3d.at(i) - camParam.T2W)) << endl
+                 << camParam.T2W << endl
+                 << "world cordinates:" << ptW.at(i) << endl;
         }
     }
     catch (...) {
