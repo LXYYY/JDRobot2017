@@ -317,13 +317,18 @@ bool CVClass::worldCSInit(void) {
                 cout << "pts3d.at(4)" << pts3d.at(1) << endl;
                 camParam.T2W = pts3d.at(1);
                 cout << "w2W" << camParam.T2W << endl;
+
+                Mat tmp1;
+                tmp1=camParam.R2W.col(0).mul(camParam.R2W.col(1)).mul(camParam.R2W.col(2));
+                if(tmp1.at<double>(0)+tmp1.at<double>(1)+tmp1.at<double>(2)<0.1){
+                    return true;
+                }
             }
             catch (...) {
                 cout << "world CS compute failed" << endl;
                 return false;
             }
 //            worldCSInited = true;
-            return true;
         }
     }
     return false;
