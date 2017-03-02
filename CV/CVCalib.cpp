@@ -157,21 +157,15 @@ Mat_<double> IterativeLinearLSTriangulation(Point3d u,    //homogenous image poi
         X(2) = X_(2);
         X(3) = 1.0;
     }
-
-    return X;
+    Mat_<double> rlt(3, 1);
+    rlt(0) = X(0);
+    rlt(1) = X(1);
+    rlt(2) = X(2);
+    return rlt;
 }
 
 
-bool CVClass::getPoint3d(vector<Point> pts2dL, vector<Point> pts2dR, vector<Point3f> &pts3d) {
-    double fxL = camParam.cameraMatrix[0].at<double>(0, 0);
-    double fyL = camParam.cameraMatrix[0].at<double>(1, 1);
-    double cxL = camParam.cameraMatrix[0].at<double>(0, 2);
-    double cyL = camParam.cameraMatrix[0].at<double>(1, 2);
-
-    double fxR = camParam.cameraMatrix[1].at<double>(0, 0);
-    double fyR = camParam.cameraMatrix[1].at<double>(1, 1);
-    double cxR = camParam.cameraMatrix[1].at<double>(0, 2);
-    double cyR = camParam.cameraMatrix[1].at<double>(1, 2);
+bool CVClass::getPoint3d(vector<Point> pts2dL, vector<Point> pts2dR, vector<Mat> &pts3d) {
     pts3d.clear();
     if (pts2dL.size() != pts2dR.size()) {
         cout << "pt2dL.size() != pt2dR.size()" << endl;
@@ -179,20 +173,15 @@ bool CVClass::getPoint3d(vector<Point> pts2dL, vector<Point> pts2dR, vector<Poin
     }
     try {
         pts3d.clear();
-
         size_t npts = pts2dL.size();
-        vector<Mat> pt3dMat(npts);
+        vector<Mat> pts3dM(npts);
+        pts3d.resize(npts);
         for (size_t i = 0; i < npts; i++) {
             Point3d ptL = Point3d(pts2dL.at(i).x, pts2dL.at(i).y, 1);
             Point3d ptR = Point3d(pts2dR.at(i).x, pts2dR.at(i).y, 1);
-            pt3dMat.at(i) = IterativeLinearLSTriangulation(ptL, camParam.P1,
-                                                           ptR, camParam.P2);
-        }
-        for (size_t i = 0; i < pt3dMat.size(); i++) {
-            pts3d.push_back(Point3f(pt3dMat.at(i).at<double>(0),
-                                    pt3dMat.at(i).at<double>(1),
-                                    pt3dMat.at(i).at<double>(2)));
-//            cout<<pt3dMat.at(i)<<endl;
+            pts3d.at(i) = IterativeLinearLSTriangulation(ptL, camParam.P1,
+                                                         ptR, camParam.P2);
+            cout<<pts3d.at(i)<<endl;
         }
     }
     catch (...) {
@@ -243,37 +232,91 @@ bool CVClass::worldCSInit(void) {
     aprilTags.drawTags(tImgL, aprilTags.tagsL);
     aprilTags.drawTags(tImgR, aprilTags.tagsR);
 
-    resize(tImgL,tImgL,Size(),0.5,0.5);
-    resize(tImgR,tImgR,Size(),0.5,0.5);
+    resize(tImgL, tImgL, Size(), 0.5, 0.5);
+    resize(tImgR, tImgR, Size(), 0.5, 0.5);
     imshow("tags left", tImgL);
     imshow("tags right", tImgR);
 
     char c = waitKeyProc(1);
 
     if (c == 'w') {
-        cout<<c<<endl;
-        cout<<foundTagsL<<" "<<foundTagsR<<endl;
+        cout << c << endl;
+        cout << foundTagsL << " " << foundTagsR << endl;
         if (foundTagsL && foundTagsR) {
-            vector<Point3f> pts3d;
-            vector<Point> pts2dL, pts2dR;
+            try {
+                vector<Mat> pts3d;
+                vector<Point> pts2dL, pts2dR;
 
-            for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 4; i++) {
+                    pts2dL.push_back(
+                            Point(aprilTags.tagsL.at(0).p[i].first,
+                                  aprilTags.tagsL.at(0).p[i].second));
+                    pts2dR.push_back(
+                            Point(aprilTags.tagsR.at(0).p[i].first,
+                                  aprilTags.tagsR.at(0).p[i].second));
+                }
                 pts2dL.push_back(
-                        Point(aprilTags.tagsL.at(0).p[i].first,
-                              aprilTags.tagsL.at(0).p[i].second));
+                        Point(aprilTags.tagsL.at(0).cxy.first,
+                              aprilTags.tagsL.at(0).cxy.second));
                 pts2dR.push_back(
-                        Point(aprilTags.tagsR.at(0).p[i].first,
-                              aprilTags.tagsR.at(0).p[i].second));
-            }
-            pts2dL.push_back(
-                    Point(aprilTags.tagsL.at(0).cxy.first,
-                          aprilTags.tagsL.at(0).cxy.second));
-            pts2dR.push_back(
-                    Point(aprilTags.tagsR.at(0).cxy.first,
-                          aprilTags.tagsR.at(0).cxy.second));
+                        Point(aprilTags.tagsR.at(0).cxy.first,
+                              aprilTags.tagsR.at(0).cxy.second));
 
-            getPoint3d(pts2dL, pts2dR, pts3d);
-            cout<<(Mat)pts3d<<endl;
+                getPoint3d(pts2dL, pts2dR, pts3d);
+                for (size_t i = 0; i < pts3d.size(); i++) {
+                    cout << pts3d.at(i) << endl;
+                }
+
+                Mat_<double> worldMat(3, 3);
+                Mat_<double> ptsMat(3, 3);
+                Mat_<double> deltaMat(3, 3);
+                Mat_<double> p5Mat;
+
+                pts3d.at(0).copyTo(ptsMat.col(0));
+                pts3d.at(2).copyTo(ptsMat.col(2));
+//                cout<<"test1"<<pts3d.at(0)<<endl<<pts3d.at(1)<<endl<<pts3d.at(2)<<endl
+//                        <<pts3d.at(0)-pts3d.at(1)<<endl<<pts3d.at(2)-pts3d.at(1)<<endl;
+//                cout<<"pts3d.at(0).cross(pts3d.at(1)"<<(pts3d.at(0)-pts3d.at(2)).cross(pts3d.at(1)-pts3d.at(4))<<endl;
+                p5Mat=(pts3d.at(0)-pts3d.at(1)).cross(pts3d.at(2)-pts3d.at(1))+pts3d.at(1);
+                p5Mat.copyTo(ptsMat.col(2));
+
+                pts3d.at(2).copyTo(deltaMat.col(0));
+                pts3d.at(2).copyTo(deltaMat.col(1));
+                pts3d.at(2).copyTo(deltaMat.col(2));
+
+                worldMat.at<double>(0, 0) = -150.f;
+                worldMat.at<double>(1, 0) = 0.f;
+                worldMat.at<double>(2, 0) = 0.f;
+                worldMat.at<double>(0, 1) = 0.f;
+                worldMat.at<double>(1, 1) = 150.f;
+                worldMat.at<double>(2, 1) = 0.f;
+                worldMat.at<double>(0, 2) = 0;
+                worldMat.at<double>(1, 2) = 0;
+                worldMat.at<double>(2, 2) = -22500;
+
+//                worldMat/=norm(worldMat.col(0));
+
+                cout<<"ptsMat:"<<ptsMat<<endl;
+                cout<<"deltaMat:"<<deltaMat<<endl;
+                cout << "ptsMat - deltaMat" << (ptsMat - deltaMat) << endl;
+                cout << "worldMat" << worldMat << endl;
+                cout << "worldMat.inv" << worldMat.inv() << endl;
+                camParam.R2W = (ptsMat - deltaMat) * worldMat.inv();
+                camParam.R2W.col(0)/=norm(camParam.R2W.col(0));
+                camParam.R2W.col(1)/=norm(camParam.R2W.col(1));
+                camParam.R2W.col(2)/=norm(camParam.R2W.col(2));
+                cout << "R2W" << camParam.R2W << endl;
+                cout<<camParam.R2W.col(0).mul(camParam.R2W.col(1)).mul(camParam.R2W.col(2))<<endl;
+                cout << "pts3d.at(4)" << pts3d.at(4) << endl;
+                camParam.T2W = pts3d.at(4);
+                cout << "w2W" << camParam.T2W << endl;
+            }
+            catch (...) {
+                cout << "world CS compute failed" << endl;
+                return false;
+            }
+            worldCSInited = true;
+            return true;
         }
     }
     return false;

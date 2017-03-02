@@ -71,4 +71,7 @@ void AprilTagsClass::drawTags(Mat &image, vector<AprilTags::TagDetection> tags) 
         // also highlight in the image
         tags[i].draw(image);
     }
+    circle(image,Point(tags[0].p[0].first,tags[0].p[0].second),3,Scalar(0,0,255),-1);
+    circle(image,Point(tags[0].p[1].first,tags[0].p[1].second),3,Scalar(255,0,0),-1);
+    circle(image,Point(tags[0].p[2].first,tags[0].p[2].second),3,Scalar(0,255,0),-1);
 }

@@ -26,7 +26,7 @@ private:
         ~CamClass() {}
 
         VideoCapture cam;
-        int exposure = 127;
+        int exposure = 120;
         Size imgSize = Size(1280, 1024);
         uchar *buffer;
         int fd;
@@ -159,8 +159,8 @@ public:
         Mat Q;
         Mat map1[2], map2[2];
         Size imgSize;
-        Mat rvec, tvec;
-        Matx44d m;
+        Mat R2W,T2W;
+
     } camParam;
     Mat frame;
     Mat frameL, frameR;
@@ -172,7 +172,9 @@ public:
 
     bool undistortFrame(void);
 
-    bool getPoint3d(vector<Point> pt2dL, vector<Point> pt2dR, vector<Point3f> &pt3d);
+    bool getPoint3d(vector<Point> pt2dL, vector<Point> pt2dR, vector<Mat> &pt3d);
+
+    bool getPointWorld(vector<Mat> &pt3d,vector<Mat> &ptW);
 
     bool camCalib(void);
 

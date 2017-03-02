@@ -101,8 +101,8 @@ bool CVClass::getImage() {
 bool CVClass::showImage() {
 
     try {
-        resize(frameL,frameL,Size(),0.5,0.5);
-        resize(frameR,frameR,Size(),0.5,0.5);
+        resize(frameL, frameL, Size(), 0.5, 0.5);
+        resize(frameR, frameR, Size(), 0.5, 0.5);
         imshow("image left", frameL);
         imshow("image right", frameR);
     }
@@ -300,6 +300,21 @@ char CVClass::waitKeyProc(int delay) {
         camR.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, camR.exposure);
     }
     return c;
+}
+
+bool CVClass::getPointWorld(vector<Mat> &pt3d, vector<Mat> &ptW) {
+    ptW.clear();
+    try {
+        for (size_t i = 0; i < pt3d.size(); i++) {
+            ptW.push_back(camParam.R2W.inv() * (pt3d.at(i) - camParam.T2W));
+            cout<<"getPointworld"<<camParam.R2W<<camParam.R2W.inv()<<pt3d.at(i)<<camParam.T2W<<endl;
+        }
+    }
+    catch (...) {
+        cout << "getPointWorld failed" << endl;
+        return false;
+    }
+    return true;
 }
 
 
