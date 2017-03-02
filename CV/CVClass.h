@@ -26,7 +26,7 @@ private:
         ~CamClass() {}
 
         VideoCapture cam;
-        int exposure = 120;
+        int exposure = 90;
         Size imgSize = Size(1280, 1024);
         uchar *buffer;
         int fd;

@@ -50,17 +50,23 @@ bool CVClass::camInit(bool LR) {
 #ifdef LINUX
 
     try {
-        camL.set_Video_Fps(100, 600);
+        cout<<"test1"<<endl;
+
+        camL.exposure=120;
+        camR.exposure=120;
+
+//        camL.set_Video_Fps(100, 600);
 //    get_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE);
         camL.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL);
         camL.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, camL.exposure);
 //        camL.set_Video_Parameter(V4L2_CID_BRIGHTNESS, brightness);
 
-        camR.set_Video_Fps(100, 600);
+//        camR.set_Video_Fps(100, 600);
 //    get_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE);
         camR.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL);
         camR.set_Video_Parameter(V4L2_CID_EXPOSURE_ABSOLUTE, camR.exposure);
-
+        cout<<"exposure:"<<camL.exposure<<ends<<camR.exposure<<endl;
+        cout<<"test"<<endl;
 //        camL.set_Video_Parameter(V4L2_CID_BRIGHTNESS, brightness);
 
 //        camL.set_Video_Parameter(V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL);
@@ -235,6 +241,7 @@ bool CVClass::processSingle(Mat img, bool LorR, vector<objBoxImg> &objBoxRlt) {
     cvtColor(src, src, COLOR_GRAY2BGR);
 //    drawContours(cdst, contours0, -1, Scalar(0, 0, 255));
     drawContours(cdst, approx, -1, Scalar(0, 255, 0));
+    resize(cdst,cdst,Size(),0.5,0.5);
     imshow("test" + LR, cdst);
 
     if (objBoxPts.size()) {
@@ -310,6 +317,7 @@ bool CVClass::getPointWorld(vector<Mat> &pt3d, vector<Mat> &ptW) {
             cout << "getPointworld" << endl
                  << "camParam.R2W:" << camParam.R2W << endl
                  << "camParam.R2W.inv:" << camParam.R2W.inv() << endl
+                 << "camParam.R2W.t:" << camParam.R2W.t() << endl
                  << "R2W.norm:" << norm(camParam.R2W) << endl
                  << "R2W.inv.norm:" << norm(camParam.R2W.inv()) << endl
                  << "r2w*r2w.inv:" << camParam.R2W * camParam.R2W.inv() << endl

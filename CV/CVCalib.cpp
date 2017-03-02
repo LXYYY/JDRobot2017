@@ -181,7 +181,7 @@ bool CVClass::getPoint3d(vector<Point> pts2dL, vector<Point> pts2dR, vector<Mat>
             Point3d ptR = Point3d(pts2dR.at(i).x, pts2dR.at(i).y, 1);
             pts3d.at(i) = IterativeLinearLSTriangulation(ptL, camParam.P1,
                                                          ptR, camParam.P2);
-            cout << pts3d.at(i) << endl;
+//            cout << pts3d.at(i) << endl;
         }
     }
     catch (...) {
@@ -307,12 +307,12 @@ bool CVClass::worldCSInit(void) {
                 cout << "ptsMat - deltaMat" << (ptsMat - deltaMat) << endl;
                 cout << "worldMat" << worldMat << endl;
                 cout << "worldMat.inv" << worldMat.inv() << endl;
-                camParam.R2W = (ptsMat - deltaMat) * worldMat.inv();
-                camParam.R2W.col(0) /= norm(camParam.R2W.col(0));
+                camParam.R2W = (ptsMat - deltaMat) ;
+                camParam.R2W.col(0) /= -norm(camParam.R2W.col(0));
                 camParam.R2W.col(1) /= norm(camParam.R2W.col(1));
-                camParam.R2W.col(2) /= norm(camParam.R2W.col(2));
+                camParam.R2W.col(2) /= -norm(camParam.R2W.col(2));
                 cout << "R2W" << camParam.R2W << endl;
-
+                cout<<"r.det="<<determinant(camParam.R2W)<<endl;
                 cout << camParam.R2W.col(0).mul(camParam.R2W.col(1)).mul(camParam.R2W.col(2)) << endl;
                 cout << "pts3d.at(4)" << pts3d.at(1) << endl;
                 camParam.T2W = pts3d.at(1);
@@ -322,7 +322,7 @@ bool CVClass::worldCSInit(void) {
                 cout << "world CS compute failed" << endl;
                 return false;
             }
-            worldCSInited = true;
+//            worldCSInited = true;
             return true;
         }
     }
@@ -529,7 +529,8 @@ bool CVClass::camCalib(void) {
     string outputFilenameR = "paramR.xml";
     string inputFilename = "";
 
-    int i, nframes;
+    int i;
+    size_t nframes;
     bool undistortImage = false;
     int flags = 0;
     VideoCapture capture;
@@ -546,7 +547,7 @@ bool CVClass::camCalib(void) {
     char imgName[20] = "";
     char outputFilename[20] = "";
     vector<Mat> imgs;
-    for (int lr = 1; lr > -1; lr--) {
+    for (int lr = 1; lr > 0; lr--) {
         imgs.clear();
         imagePoints.clear();
         mode = CAPTURING;

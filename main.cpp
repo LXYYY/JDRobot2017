@@ -6,7 +6,7 @@
 #include "CV/CVClass.h"
 
 #define Calibrate
-//#define ShowUndistored
+#define ShowUndistored
 using namespace cv;
 using namespace std;
 
@@ -17,9 +17,10 @@ int main() {
     cvClass.camInit(false);
 #ifdef Calibrate
 //    cvClass.camCalib();
-    //return 0;
+//    return 0;
 //    cvClass.stereoCalib();
 #endif
+
     if (!cvClass.camParamInit()) {
         cout << "camParamInit failed" << endl;
         getchar();
@@ -32,14 +33,15 @@ int main() {
     }
     while (1) {
         cvClass.getImage();
-        if (!cvClass.worldCSInited) {
+//#ifdef ShowUndistored
+//        cvClass.undistortFrame();
+//        cvClass.showUndistortedImage();
+//#endif
+         if (!cvClass.worldCSInited) {
             cvClass.worldCSInited = cvClass.worldCSInit();
             continue;
         }
-#ifdef ShowUndistored
-        cvClass.undistortFrame();
-        cvClass.showUndistortedImage();
-#endif
+
         vector<CVClass::objBoxImg> objBoxL;
         vector<CVClass::objBoxImg> objBoxR;
         bool foundL = cvClass.processSingle(cvClass.frameL, false, objBoxL);
@@ -51,22 +53,23 @@ int main() {
             objBoxL.at(0).sortPts();
             objBoxR.at(0).sortPts();
             pts2dL.push_back(objBoxL.at(0).pts.at(0));
-            pts2dL.push_back(objBoxL.at(0).pts.at(objBoxL.at(0).pts.size()-1));
+//            pts2dL.push_back(objBoxL.at(0).pts.at(objBoxL.at(0).pts.size()-1));
 
             pts2dR.push_back(objBoxR.at(0).pts.at(0));
-            pts2dR.push_back(objBoxR.at(0).pts.at(objBoxR.at(0).pts.size()-1));
+//            pts2dR.push_back(objBoxR.at(0).pts.at(objBoxR.at(0).pts.size()-1));
 
             vector<Mat> ptsW;
             cout<<"Points"<<(Mat)pts2dL<<(Mat)pts2dR<<endl;
             cvClass.getPoint3d(pts2dL, pts2dR, pts3d);
             cvClass.getPointWorld(pts3d, ptsW);
-            for (size_t i = 0; i < ptsW.size(); i++) {
-//                cout << ptsW.at(i) << endl;
+            for (size_t i = 0; i < pts3d.size(); i++) {
+                cout << ptsW.at(i) << endl;
                 cout <<"test"<< pts3d.at(i) << endl;
                 cout<<"dist to origin="<<norm(pts3d.at(i)-cvClass.camParam.T2W)<<endl;
             }
-            cout<<"dist="<<norm(pts3d.at(0)-pts3d.at(1))<<endl;
+//            cout<<"dist="<<norm(pts3d.at(0)-pts3d.at(1))<<endl;
         }
+
         cvClass.showImage();
         char c = waitKey(1);
         if (c == 'q') break;
