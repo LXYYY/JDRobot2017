@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTagsClass.cpp
+/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTagsClass.cpp
 AprilTagsClass.h
-/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTagsClass.h
+/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTagsClass.h
 
-/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTagsClass.h
+/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTagsClass.h
 iostream
 -
 cstring
@@ -28,17 +28,17 @@ cmath
 opencv2/opencv.hpp
 -
 AprilTags/TagDetector.h
-/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTags/TagDetector.h
+/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTags/TagDetector.h
 AprilTags/Tag16h5.h
-/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTags/Tag16h5.h
+/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTags/Tag16h5.h
 AprilTags/Tag25h7.h
-/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTags/Tag25h7.h
+/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTags/Tag25h7.h
 AprilTags/Tag25h9.h
-/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTags/Tag25h9.h
+/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTags/Tag25h9.h
 AprilTags/Tag36h9.h
-/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTags/Tag36h9.h
+/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTags/Tag36h9.h
 AprilTags/Tag36h11.h
-/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTags/Tag36h11.h
+/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTags/Tag36h11.h
 
 /home/jdrobot/Desktop/JDRobot/CV/CVCalib.cpp
 CVClass.h
@@ -79,16 +79,62 @@ sys/mman.h
 -
 unistd.h
 -
-../AprilTagsClass/AprilTagsClass.h
-/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTagsClass.h
+AprilTagsClass/AprilTagsClass.h
+/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTagsClass.h
 
 /home/jdrobot/Desktop/JDRobot/Communicate/Communication.cpp
 Communication.h
 /home/jdrobot/Desktop/JDRobot/Communicate/Communication.h
 
 /home/jdrobot/Desktop/JDRobot/Communicate/Communication.h
+SocketClass/SocketClass.h
+/home/jdrobot/Desktop/JDRobot/Communicate/SocketClass/SocketClass.h
+opencv2/opencv.hpp
+-
+iostream
+-
+
+/home/jdrobot/Desktop/JDRobot/Communicate/SocketClass/SocketClass.cpp
+SocketClass.h
+/home/jdrobot/Desktop/JDRobot/Communicate/SocketClass/SocketClass.h
+iostream
+-
+
+/home/jdrobot/Desktop/JDRobot/Communicate/SocketClass/SocketClass.h
+sys/types.h
+-
+sys/socket.h
+-
+stdio.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+unistd.h
+-
+string.h
+-
+stdlib.h
+-
+fcntl.h
+-
+sys/shm.h
+-
 
 /home/jdrobot/Desktop/JDRobot/Param.h
+
+/home/jdrobot/Desktop/JDRobot/Threads/Threads.cpp
+pthread.h
+/home/jdrobot/Desktop/JDRobot/Threads/pthread.h
+Threads.h
+/home/jdrobot/Desktop/JDRobot/Threads/Threads.h
+
+/home/jdrobot/Desktop/JDRobot/Threads/Threads.h
+../Communicate/Communication.h
+/home/jdrobot/Desktop/JDRobot/Communicate/Communication.h
+../CV/CVClass.h
+/home/jdrobot/Desktop/JDRobot/CV/CVClass.h
 
 /home/jdrobot/Desktop/JDRobot/main.cpp
 iostream
@@ -97,6 +143,8 @@ opencv2/opencv.hpp
 -
 CV/CVClass.h
 /home/jdrobot/Desktop/JDRobot/CV/CVClass.h
+Threads/Threads.h
+/home/jdrobot/Desktop/JDRobot/Threads/Threads.h
 
 /home/jdrobot/apriltags/build/include/AprilTags/FloatImage.h
 algorithm

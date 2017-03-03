@@ -4,10 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTagsClass.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o"
+  "/home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTagsClass.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o"
   "/home/jdrobot/Desktop/JDRobot/CV/CVCalib.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/CV/CVCalib.cpp.o"
   "/home/jdrobot/Desktop/JDRobot/CV/CVClass.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/CV/CVClass.cpp.o"
   "/home/jdrobot/Desktop/JDRobot/Communicate/Communication.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o"
+  "/home/jdrobot/Desktop/JDRobot/Communicate/SocketClass/SocketClass.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o"
+  "/home/jdrobot/Desktop/JDRobot/Threads/Threads.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o"
   "/home/jdrobot/Desktop/JDRobot/main.cpp" "/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles/JDRobot.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

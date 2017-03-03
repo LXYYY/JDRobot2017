@@ -12,7 +12,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-#include "../AprilTagsClass/AprilTagsClass.h"
+#include "AprilTagsClass/AprilTagsClass.h"
 
 using namespace std;
 using namespace cv;

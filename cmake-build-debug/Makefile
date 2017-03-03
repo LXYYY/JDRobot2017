@@ -123,32 +123,32 @@ JDRobot/fast:
 	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/build
 .PHONY : JDRobot/fast
 
-AprilTagsClass/AprilTagsClass.o: AprilTagsClass/AprilTagsClass.cpp.o
+CV/AprilTagsClass/AprilTagsClass.o: CV/AprilTagsClass/AprilTagsClass.cpp.o
 
-.PHONY : AprilTagsClass/AprilTagsClass.o
+.PHONY : CV/AprilTagsClass/AprilTagsClass.o
 
 # target to build an object file
-AprilTagsClass/AprilTagsClass.cpp.o:
-	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o
-.PHONY : AprilTagsClass/AprilTagsClass.cpp.o
+CV/AprilTagsClass/AprilTagsClass.cpp.o:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o
+.PHONY : CV/AprilTagsClass/AprilTagsClass.cpp.o
 
-AprilTagsClass/AprilTagsClass.i: AprilTagsClass/AprilTagsClass.cpp.i
+CV/AprilTagsClass/AprilTagsClass.i: CV/AprilTagsClass/AprilTagsClass.cpp.i
 
-.PHONY : AprilTagsClass/AprilTagsClass.i
+.PHONY : CV/AprilTagsClass/AprilTagsClass.i
 
 # target to preprocess a source file
-AprilTagsClass/AprilTagsClass.cpp.i:
-	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.i
-.PHONY : AprilTagsClass/AprilTagsClass.cpp.i
+CV/AprilTagsClass/AprilTagsClass.cpp.i:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.i
+.PHONY : CV/AprilTagsClass/AprilTagsClass.cpp.i
 
-AprilTagsClass/AprilTagsClass.s: AprilTagsClass/AprilTagsClass.cpp.s
+CV/AprilTagsClass/AprilTagsClass.s: CV/AprilTagsClass/AprilTagsClass.cpp.s
 
-.PHONY : AprilTagsClass/AprilTagsClass.s
+.PHONY : CV/AprilTagsClass/AprilTagsClass.s
 
 # target to generate assembly for a file
-AprilTagsClass/AprilTagsClass.cpp.s:
-	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.s
-.PHONY : AprilTagsClass/AprilTagsClass.cpp.s
+CV/AprilTagsClass/AprilTagsClass.cpp.s:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.s
+.PHONY : CV/AprilTagsClass/AprilTagsClass.cpp.s
 
 CV/CVCalib.o: CV/CVCalib.cpp.o
 
@@ -231,6 +231,60 @@ Communicate/Communication.cpp.s:
 	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.s
 .PHONY : Communicate/Communication.cpp.s
 
+Communicate/SocketClass/SocketClass.o: Communicate/SocketClass/SocketClass.cpp.o
+
+.PHONY : Communicate/SocketClass/SocketClass.o
+
+# target to build an object file
+Communicate/SocketClass/SocketClass.cpp.o:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o
+.PHONY : Communicate/SocketClass/SocketClass.cpp.o
+
+Communicate/SocketClass/SocketClass.i: Communicate/SocketClass/SocketClass.cpp.i
+
+.PHONY : Communicate/SocketClass/SocketClass.i
+
+# target to preprocess a source file
+Communicate/SocketClass/SocketClass.cpp.i:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.i
+.PHONY : Communicate/SocketClass/SocketClass.cpp.i
+
+Communicate/SocketClass/SocketClass.s: Communicate/SocketClass/SocketClass.cpp.s
+
+.PHONY : Communicate/SocketClass/SocketClass.s
+
+# target to generate assembly for a file
+Communicate/SocketClass/SocketClass.cpp.s:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.s
+.PHONY : Communicate/SocketClass/SocketClass.cpp.s
+
+Threads/Threads.o: Threads/Threads.cpp.o
+
+.PHONY : Threads/Threads.o
+
+# target to build an object file
+Threads/Threads.cpp.o:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o
+.PHONY : Threads/Threads.cpp.o
+
+Threads/Threads.i: Threads/Threads.cpp.i
+
+.PHONY : Threads/Threads.i
+
+# target to preprocess a source file
+Threads/Threads.cpp.i:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/Threads/Threads.cpp.i
+.PHONY : Threads/Threads.cpp.i
+
+Threads/Threads.s: Threads/Threads.cpp.s
+
+.PHONY : Threads/Threads.s
+
+# target to generate assembly for a file
+Threads/Threads.cpp.s:
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/Threads/Threads.cpp.s
+.PHONY : Threads/Threads.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -267,9 +321,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... JDRobot"
-	@echo "... AprilTagsClass/AprilTagsClass.o"
-	@echo "... AprilTagsClass/AprilTagsClass.i"
-	@echo "... AprilTagsClass/AprilTagsClass.s"
+	@echo "... CV/AprilTagsClass/AprilTagsClass.o"
+	@echo "... CV/AprilTagsClass/AprilTagsClass.i"
+	@echo "... CV/AprilTagsClass/AprilTagsClass.s"
 	@echo "... CV/CVCalib.o"
 	@echo "... CV/CVCalib.i"
 	@echo "... CV/CVCalib.s"
@@ -279,6 +333,12 @@ help:
 	@echo "... Communicate/Communication.o"
 	@echo "... Communicate/Communication.i"
 	@echo "... Communicate/Communication.s"
+	@echo "... Communicate/SocketClass/SocketClass.o"
+	@echo "... Communicate/SocketClass/SocketClass.i"
+	@echo "... Communicate/SocketClass/SocketClass.s"
+	@echo "... Threads/Threads.o"
+	@echo "... Threads/Threads.i"
+	@echo "... Threads/Threads.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

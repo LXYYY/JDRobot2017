@@ -153,28 +153,76 @@ CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o.provides: CMakeFiles/JDRo
 CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o.provides.build: CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o
 
 
-CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o: CMakeFiles/JDRobot.dir/flags.make
-CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o: ../AprilTagsClass/AprilTagsClass.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o -c /home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTagsClass.cpp
+CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o: CMakeFiles/JDRobot.dir/flags.make
+CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o: ../Communicate/SocketClass/SocketClass.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o -c /home/jdrobot/Desktop/JDRobot/Communicate/SocketClass/SocketClass.cpp
 
-CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTagsClass.cpp > CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.i
+CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jdrobot/Desktop/JDRobot/Communicate/SocketClass/SocketClass.cpp > CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.i
 
-CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jdrobot/Desktop/JDRobot/AprilTagsClass/AprilTagsClass.cpp -o CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.s
+CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jdrobot/Desktop/JDRobot/Communicate/SocketClass/SocketClass.cpp -o CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.s
 
-CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o.requires:
+CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o.requires:
 
-.PHONY : CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o.requires
+.PHONY : CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o.requires
 
-CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o.provides: CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o.requires
-	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o.provides.build
-.PHONY : CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o.provides
+CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o.provides: CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o.requires
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o.provides.build
+.PHONY : CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o.provides
 
-CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o.provides.build: CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o
+CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o.provides.build: CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o
+
+
+CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o: CMakeFiles/JDRobot.dir/flags.make
+CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o: ../CV/AprilTagsClass/AprilTagsClass.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o -c /home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTagsClass.cpp
+
+CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTagsClass.cpp > CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.i
+
+CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jdrobot/Desktop/JDRobot/CV/AprilTagsClass/AprilTagsClass.cpp -o CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.s
+
+CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o.requires:
+
+.PHONY : CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o.requires
+
+CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o.provides: CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o.requires
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o.provides.build
+.PHONY : CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o.provides
+
+CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o.provides.build: CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o
+
+
+CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o: CMakeFiles/JDRobot.dir/flags.make
+CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o: ../Threads/Threads.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o -c /home/jdrobot/Desktop/JDRobot/Threads/Threads.cpp
+
+CMakeFiles/JDRobot.dir/Threads/Threads.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/JDRobot.dir/Threads/Threads.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jdrobot/Desktop/JDRobot/Threads/Threads.cpp > CMakeFiles/JDRobot.dir/Threads/Threads.cpp.i
+
+CMakeFiles/JDRobot.dir/Threads/Threads.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/JDRobot.dir/Threads/Threads.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jdrobot/Desktop/JDRobot/Threads/Threads.cpp -o CMakeFiles/JDRobot.dir/Threads/Threads.cpp.s
+
+CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o.requires:
+
+.PHONY : CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o.requires
+
+CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o.provides: CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o.requires
+	$(MAKE) -f CMakeFiles/JDRobot.dir/build.make CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o.provides.build
+.PHONY : CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o.provides
+
+CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o.provides.build: CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o
 
 
 # Object files for target JDRobot
@@ -183,7 +231,9 @@ JDRobot_OBJECTS = \
 "CMakeFiles/JDRobot.dir/CV/CVCalib.cpp.o" \
 "CMakeFiles/JDRobot.dir/CV/CVClass.cpp.o" \
 "CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o" \
-"CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o"
+"CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o" \
+"CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o" \
+"CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o"
 
 # External object files for target JDRobot
 JDRobot_EXTERNAL_OBJECTS =
@@ -192,10 +242,12 @@ JDRobot: CMakeFiles/JDRobot.dir/main.cpp.o
 JDRobot: CMakeFiles/JDRobot.dir/CV/CVCalib.cpp.o
 JDRobot: CMakeFiles/JDRobot.dir/CV/CVClass.cpp.o
 JDRobot: CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o
-JDRobot: CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o
+JDRobot: CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o
+JDRobot: CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o
+JDRobot: CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o
 JDRobot: CMakeFiles/JDRobot.dir/build.make
 JDRobot: CMakeFiles/JDRobot.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable JDRobot"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jdrobot/Desktop/JDRobot/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable JDRobot"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/JDRobot.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -207,7 +259,9 @@ CMakeFiles/JDRobot.dir/requires: CMakeFiles/JDRobot.dir/main.cpp.o.requires
 CMakeFiles/JDRobot.dir/requires: CMakeFiles/JDRobot.dir/CV/CVCalib.cpp.o.requires
 CMakeFiles/JDRobot.dir/requires: CMakeFiles/JDRobot.dir/CV/CVClass.cpp.o.requires
 CMakeFiles/JDRobot.dir/requires: CMakeFiles/JDRobot.dir/Communicate/Communication.cpp.o.requires
-CMakeFiles/JDRobot.dir/requires: CMakeFiles/JDRobot.dir/AprilTagsClass/AprilTagsClass.cpp.o.requires
+CMakeFiles/JDRobot.dir/requires: CMakeFiles/JDRobot.dir/Communicate/SocketClass/SocketClass.cpp.o.requires
+CMakeFiles/JDRobot.dir/requires: CMakeFiles/JDRobot.dir/CV/AprilTagsClass/AprilTagsClass.cpp.o.requires
+CMakeFiles/JDRobot.dir/requires: CMakeFiles/JDRobot.dir/Threads/Threads.cpp.o.requires
 
 .PHONY : CMakeFiles/JDRobot.dir/requires
 

@@ -6,14 +6,16 @@ set(CMAKE_CXX_STANDARD 11)
 set(HEADER_FILES
         Param.h
         CV/CVClass.h
-        Communicate/Communication.h)
+        Communicate/Communication.h
+        Communicate/SocketClass/SocketClass.h)
 
 set(SOURCE_FILES
         main.cpp
         CV/CVCalib.cpp
         CV/CVClass.cpp
         Communicate/Communication.cpp
-        ${HEADER_FILES} AprilTagsClass/AprilTagsClass.cpp AprilTagsClass/AprilTagsClass.h)
+        Communicate/SocketClass/SocketClass.cpp
+        ${HEADER_FILES} CV/AprilTagsClass/AprilTagsClass.cpp CV/AprilTagsClass/AprilTagsClass.h Communicate/SocketClass/SocketClass.cpp Communicate/SocketClass/SocketClass.h Threads/Threads.cpp Threads/Threads.h)
 
 add_executable(JDRobot ${SOURCE_FILES})
 
@@ -39,3 +41,4 @@ target_link_libraries(JDRobot opencv_superres)
 target_link_libraries(JDRobot opencv_stitching)
 target_link_libraries(JDRobot opencv_shape)
 target_link_libraries(JDRobot opencv_photo)
+target_link_libraries(JDRobot pthread)
