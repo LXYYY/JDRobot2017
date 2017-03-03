@@ -121,7 +121,7 @@ Mat_<double> IterativeLinearLSTriangulation(Point3d u,    //homogenous image poi
     double wi = 1, wi1 = 1;
     Mat_<double> X(4, 1);
 
-    for (int i = 0; i < 10; i++) { //Hartley suggests 10 iterations at most
+    for (int i = 0; i < 20; i++) { //Hartley suggests 10 iterations at most
         Mat_<double> X_ = LinearLSTriangulation(u, P, u1, P1);
         X(0) = X_(0);
         X(1) = X_(1);
@@ -494,7 +494,7 @@ bool CVClass::runAndSave(const string &outputFilename,
 }
 
 bool CVClass::camCalib(void) {
-#if 0
+#if 1
     char imgL[10] = "";
     char imgR[10] = "";
     int cnt = 0;
@@ -552,7 +552,7 @@ bool CVClass::camCalib(void) {
     char imgName[20] = "";
     char outputFilename[20] = "";
     vector<Mat> imgs;
-    for (int lr = 1; lr > 0; lr--) {
+    for (int lr = 0; lr > -1; lr--) {
         imgs.clear();
         imagePoints.clear();
         mode = CAPTURING;
